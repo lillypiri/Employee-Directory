@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 12px;
+  font-family: 'Varela Round', sans-serif;
+  color: gray;
+  background: #e5e0e0;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.container {
+	padding: 10px;
+	background: #f9f4f4;
+  border-radius: 5px;
+	margin: 45px auto;
+  box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
+}
+
+.item {
+	color: gray;
+	padding: 30px;
+	margin: 10px;
+	background: #fff;
+	border-radius: 3px;
+  border: 1px solid silver;
+  box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
+}
+
+.page-title {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: 'Varela Round', sans-serif;
+  color: gray;
+}
+
+.user-card {
+  text-transform: capitalize;
+}
+
+.user-card strong {
+  color: black;
+}
+
+.user-card > div {
+  padding-left: 90px;
+  line-height: 20px;
+}
+
+.email {
+  text-transform: lowercase;
+}
+
+.profile-picture {
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 780px) {
+  .page-title {
+    font-size: 12px;
+  }
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

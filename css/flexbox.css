@@ -1,0 +1,20 @@
+.container {
+  display: inline-flex;
+  height: 25%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.page-title {
+  flex-basis: 100%;
+  padding: inherit;
+}
+
+.item {
+  flex: 1 200px;
+}
+
+.profile-picture {
+  float: left;
+}
