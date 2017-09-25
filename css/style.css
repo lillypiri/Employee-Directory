@@ -27,6 +27,11 @@ body {
 	border-radius: 6px;
   border: 1px solid silver;
   box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
+  transition: all .3s ease-in-out;
+}
+
+.item:hover {
+  transform: scale(1.1);
 }
 
 hr {

@@ -1,7 +1,7 @@
 var xhr = new XMLHttpRequest();
 
 var modal = document.getElementById('myModal');
-var span = document.getElementsByClassName("close")[0];
+var span = document.querySelector('.close');
 var modalContent = document.querySelector('.modal-content');
 
 xhr.onload = function() {
@@ -18,6 +18,7 @@ xhr.onload = function() {
                 console.log("modal content", modalContent);
                 modalContent.innerHTML =
                 '<div>\
+                <span id="close" class="close">' + '&times' + '</span>\
                 <img src="' + user.picture.large + '" class ="profile-picture-modal">\
                 </div>\
                 <div class="user-card-modal">\
@@ -30,7 +31,6 @@ xhr.onload = function() {
                     <div>' + "Birthday: " + d[1] +'/'+ d[2] +'/'+ d[0]; + '</div>\
                 </div>'
                 item.getAttribute("data-index");
-                console.log(e.target);
                 showModal();
             });
             item.innerHTML = '\
@@ -42,6 +42,7 @@ xhr.onload = function() {
                         <div>' + user.location.city + '</div>\
                     </div>\
                 </div>'
+
 
         });
     } else {
@@ -58,16 +59,21 @@ var usercard = document.querySelectorAll('.item');
 function showModal() {
     var data = xhr.response;
     var jsonResponse = JSON.parse(data);
-    // console.log(xhr.response);
     modal.style.display = "block";
-
+    span = document.querySelector('.close');
+    closeModal();
 };
 
-span.onclick = function() {
-    modal.style.display = "none";
-}
+function closeModal() {
+    span.onclick = function(event) {
+        if (event.target == span) {
+            modal.style.display = "none";
+        }
+    }
+};
 
 window.onclick = function(event) {
+    console.log(event.target);
     if (event.target == modal) {
         modal.style.display = "none";
     }
