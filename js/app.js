@@ -13,9 +13,8 @@ xhr.onload = function() {
             var d = user.dob.slice(0, 10).split('-');
             var item = document.querySelector(".item-" + (index + 1));
             item.setAttribute("data-index", index);
-            item.addEventListener("click",function (e) {
-
-                console.log("modal content", modalContent);
+            item.addEventListener("click",function (event) {
+                // console.log("modal content", modalContent);
                 modalContent.innerHTML =
                 '<div>\
                 <span id="close" class="close">' + '&times' + '</span>\
@@ -28,7 +27,9 @@ xhr.onload = function() {
                     <hr/>\
                     <div>' + user.phone + '</div>\
                     <div>' + user.location.street + ", " + user.location.city + ", " + user.location.postcode + '</div>\
-                    <div>' + "Birthday: " + d[1] +'/'+ d[2] +'/'+ d[0]; + '</div>\
+                    <div>' + "Birthday: " + d[1] +'/'+ d[2] +'/'+ d[0] + '</div>\
+                    <hr/>\
+                    <div>' + "⇇ previous     |" + "     next ⇉" + '</div>\
                 </div>'
                 item.getAttribute("data-index");
                 showModal();
@@ -64,6 +65,10 @@ function showModal() {
     closeModal();
 };
 
+modal.onclick = function(event) {
+    //getNextUser();
+}
+
 function closeModal() {
     span.onclick = function(event) {
         if (event.target == span) {
@@ -78,3 +83,8 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+//
+// function getNextUser() {
+//
+// }

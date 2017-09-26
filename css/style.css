@@ -31,7 +31,8 @@ body {
 }
 
 .item:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+  box-shadow: 10px 5px 10px 0px rgba(0,0,0,0.65);
 }
 
 hr {
@@ -116,7 +117,7 @@ hr {
     padding: 20px;
     border: 1px solid #888;
     width: 300px;
-    height: 350px;
+    height: 375px;
     border-radius: 6px;
 }
 
