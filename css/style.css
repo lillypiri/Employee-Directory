@@ -28,6 +28,7 @@ body {
   border: 1px solid silver;
   box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
   transition: all .3s ease-in-out;
+  cursor: pointer;
 }
 
 .item:hover {
@@ -113,12 +114,15 @@ hr {
 
 .modal-content {
     background-color: #fefefe;
-    margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 300px;
     height: 375px;
     border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .close {
@@ -126,6 +130,7 @@ hr {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close:hover,
@@ -133,4 +138,31 @@ hr {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+.container {
+  display: inline-flex;
+  height: 25%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.page-title {
+  flex-basis: 100%;
+  padding: inherit;
+}
+
+.item {
+  flex: 1 200px;
+}
+
+.profile-picture {
+  float: left;
+}
+
+.previous,
+.next {
+  cursor: pointer;
 }
