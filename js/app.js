@@ -9,7 +9,7 @@
 
     var searchInput = document.querySelector('.input');
 
-    var URL = "https://randomuser.me/api/?results=12";
+    var URL = "https://randomuser.me/api/?results=12&nat=au";
 
     var state = {
         users: [],
@@ -17,7 +17,6 @@
         isModal: false,
         modalUserIndex: 0
     };
-
 
     // Load data from a URL and then pass it to the callback
     function loadUrl(url, callback) {
@@ -41,8 +40,7 @@
         if (state.isModal) {
             document.body.style.overflow = 'hidden';
 
-            var user = state.filteredUsers[state.modalUserIndex];
-            console.log("user is", user);
+            var user = state.users[state.modalUserIndex];
 
             // Make the date of birth human readable
             var d = user.dob.slice(0, 10).split('-');
@@ -131,17 +129,22 @@
                 });
 
                 // Remember the element
+                user.id = index;
                 user.element = item;
 
                 return user;
             });
+
+            state.filteredUsers = users;
         });
 
         searchInput.addEventListener('keyup', function(event) {
             var q = event.target.value.toLowerCase();
             console.log(q)
             state.filteredUsers = state.users.filter(function(user) {
-                return user.name.first.toLowerCase().indexOf(q) > -1;
+                return user.name.first.toLowerCase().indexOf(q) > -1 ||
+                user.name.last.toLowerCase().indexOf(q) > -1 ||
+                user.login.username.toLowerCase().indexOf(q) > -1;
             });
             if (q === "") {
                 state.filteredUsers = state.users
