@@ -5,8 +5,8 @@
     var searchBox = document.querySelector('.search-box');
 
     searchBox.innerHTML =
-        `<input class="input" placeholder="Start typing.."/> <button>🔎</button>`
-        
+        `<input class="input" placeholder="Start typing.."/><button>🔎</button>`
+
     var searchInput = document.querySelector('.input');
 
     var URL = "https://randomuser.me/api/?results=12";
@@ -42,6 +42,7 @@
             document.body.style.overflow = 'hidden';
 
             var user = state.filteredUsers[state.modalUserIndex];
+            console.log("user is", user);
 
             // Make the date of birth human readable
             var d = user.dob.slice(0, 10).split('-');
@@ -136,12 +137,15 @@
             });
         });
 
-        searchInput.addEventListener('keydown', function(event) {
+        searchInput.addEventListener('keyup', function(event) {
             var q = event.target.value.toLowerCase();
-
+            console.log(q)
             state.filteredUsers = state.users.filter(function(user) {
                 return user.name.first.toLowerCase().indexOf(q) > -1;
             });
+            if (q === "") {
+                state.filteredUsers = state.users
+            }
 
             render();
         });
