@@ -40,7 +40,7 @@
         if (state.isModal) {
             document.body.style.overflow = 'hidden';
 
-            var user = state.users[state.modalUserIndex];
+            var user = state.filteredUsers[state.modalUserIndex];
 
             // Make the date of birth human readable
             var d = user.dob.slice(0, 10).split('-');
@@ -94,14 +94,27 @@
             modal.style.display = "none";
         }
 
-        // Hide all users first
-        state.users.forEach(function (user) {
-            user.element.style.setProperty('display', 'none');
-        });
+        var users = document.querySelector('.users');
+        users.innerHTML = '';
+        state.filteredUsers.forEach(function(user, index) {
+            var item = document.createElement("div");
+            item.classList = 'item';
+            item.innerHTML =
+                `<div class="user-card">
+                    <img src="${user.picture.medium}" class="profile-picture">
+                    <div>
+                        <strong>${user.name.first} ${user.name.last}</strong>
+                        <div class="email">${user.email}</div>
+                        <div>${user.location.city}</div>
+                    </div>
+                </div>`;
+            item.addEventListener('click', function (event) {
+                state.isModal = true;
+                state.modalUserIndex = index;
+                render();
+            });
 
-        // Only show the ones that are on the filtered list
-        state.filteredUsers.forEach(function (user) {
-            user.element.style.setProperty('display', 'block')
+            users.appendChild(item);
         });
     }
 
@@ -110,44 +123,25 @@
         // Load the users
         loadUrl(URL, function(users) {
             // Save the list of users for rendering
-            state.users = users.map(function(user, index) {
-                var item = document.querySelector(".item-" + (index + 1));
-                item.setAttribute("data-index", index);
-                item.innerHTML =
-                    `<div class="user-card">
-                        <img src="${user.picture.medium}" class="profile-picture">
-                        <div>
-                            <strong>${user.name.first} ${user.name.last}</strong>
-                            <div class="email">${user.email}</div>
-                            <div>${user.location.city}</div>
-                        </div>
-                    </div>`;
-                item.addEventListener('click', function (event) {
-                    state.isModal = true;
-                    state.modalUserIndex = index;
-                    render();
-                });
-
-                // Remember the element
-                user.id = index;
-                user.element = item;
-
-                return user;
-            });
-
+            state.users = users
             state.filteredUsers = users;
+            render();
         });
 
         searchInput.addEventListener('keyup', function(event) {
             var q = event.target.value.toLowerCase();
-            console.log(q)
-            state.filteredUsers = state.users.filter(function(user) {
-                return user.name.first.toLowerCase().indexOf(q) > -1 ||
-                user.name.last.toLowerCase().indexOf(q) > -1 ||
-                user.login.username.toLowerCase().indexOf(q) > -1;
-            });
+
             if (q === "") {
-                state.filteredUsers = state.users
+                state.filteredUsers = state.users;
+            } else {
+                state.filteredUsers = state.users.filter(function(user) {
+                    return user.name.first.toLowerCase().indexOf(q) > -1 ||
+                    user.name.last.toLowerCase().indexOf(q) > -1 ||
+                    user.login.username.toLowerCase().indexOf(q) > -1;
+                }).map(function (user, index) {
+                    user.filteredId = index;
+                    return user;
+                });
             }
 
             render();
