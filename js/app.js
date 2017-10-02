@@ -104,8 +104,8 @@
                     <img src="${user.picture.medium}" class="profile-picture">
                     <div>
                         <strong>${user.name.first} ${user.name.last}</strong>
-                        <div class="email">${user.email}</div>
-                        <div>${user.location.city}</div>
+                        <div class="email grey-text">${user.email}</div>
+                        <div class="grey-text">${user.location.city}</div>
                     </div>
                 </div>`;
             item.addEventListener('click', function (event) {
